@@ -1,16 +1,22 @@
 import { Skeleton, Space } from 'antd'
 import React from 'react'
-import { useSelector, useStore } from 'react-redux'
 import { FallOutlined } from '@ant-design/icons'
-import LineChart from './LineChart'
+import LineChart from './components/LineChart'
+import { useAppSelector, useAppStore } from '~/shared/store'
+import { getCurrenciesState } from '~/shared/store/currencies'
 
-function ExchangeResult() {
-    const exchangeResult = useSelector((state: number) => state.exchange.result)
-    const store = useStore()
-    const targetCurrency = store.getState().targetCurrency
-    const baseCurrency = store.getState().baseCurrency
-    const currentExchangeRate = Object.values(targetCurrency.exchangeRateHistory[0])[0]
-    const previousExchangeRate = Object.values(targetCurrency.exchangeRateHistory[0])[0]
+interface IPrios {
+    baseCurrencyKey: string
+    targetCurrencyKey: string
+}
+
+export function ExchangeResultFeature({ baseCurrencyKey, targetCurrencyKey }: IPrios) {
+    const { currencies } = useAppSelector(getCurrenciesState)
+    const store = useAppStore()
+    const targetCurrency = currencies[baseCurrencyKey]
+    const baseCurrency = currencies[targetCurrencyKey]
+    const currentExchangeRate = targetCurrency?.HistoryRate[0].value
+    const previousExchangeRate = targetCurrency?.HistoryRate[1].value
     const growthTrend = ((currentExchangeRate - previousExchangeRate) / previousExchangeRate) * 100
     const colorTrend = growthTrend > 0 ? "red" : "green"
     return (
@@ -22,15 +28,15 @@ function ExchangeResult() {
             }}
         >
             <h3>Exchange result</h3>
-            {targetCurrency.value && exchangeResult ?
+            {currentExchangeRate ?
                 <Space
                     size="middle"
                     style={{
                         display: 'flex',
                     }}
                 >
-                    {targetCurrency.flag}
-                    <h1>{exchangeResult} {targetCurrency.unicodeSymbol}</h1>
+                    {/* {targetCurrency.flag} */}
+                    {/* <h1>{exchangeResult} {targetCurrency.unicodeSymbol}</h1> */}
                 </Space> :
                 <Space>
                     <Skeleton.Button
@@ -48,12 +54,10 @@ function ExchangeResult() {
                 </Space>
             }
             <Space>
-                <h4>1 {baseCurrency.unicodeSymbol} = {currentExchangeRate}{targetCurrency.unicodeSymbol}</h4>
+                <h4>1 {baseCurrency.Unicode} = {currentExchangeRate}{targetCurrency.Unicode}</h4>
                 {<FallOutlined color={colorTrend} size={20} />} <p>{Math.abs(growthTrend)}</p>
-                <LineChart data={targetCurrency.exchangeRateHistory} />
+                {/* <LineChart data={targetCurrency.exchangeRateHistory} /> */}
             </Space>
         </Space>
     )
 }
-
-export default ExchangeResult
