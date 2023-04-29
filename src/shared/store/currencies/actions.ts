@@ -2,6 +2,7 @@ import { ThunkAction } from 'redux-thunk'
 import { ServerData, CurrenciesPayload, Currency } from '~/shared/models'
 import { RootState } from '../index'
 import { Unicodes } from '~/shared/initialData'
+import { getCurrenciesList } from '~/shared/api'
 
 export const CURRENCIES_LOADING_START = 'CURRENCIES_LOADING_START'
 export const CURRENCIES_LOADING_SUCCESS = 'CURRENCIES_LOADING_SUCCESS'
@@ -43,9 +44,7 @@ export function loadCurrenciesList(): ThunkAction<
   return async (dispatch) => {
     dispatch(currenciesLoadingStartActionCreator())
 
-    const data: ServerData = await fetch(
-      'https://www.cbr-xml-daily.ru/daily_json.js',
-    ).then((res) => res.json())
+    const data: ServerData = await getCurrenciesList()
 
     //заносим в список российский рубль, так как от сервера он не приходит
     const initialCurrency: Currency = {
