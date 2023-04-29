@@ -10,6 +10,8 @@ export interface CurrenciesPayload {
 export interface CurrencyProps {
 	CharCode: string
 	Name: string
+	Icon: string
+	Unicode: string
 	HistoryRate: ExchangeRate[]
 }
 

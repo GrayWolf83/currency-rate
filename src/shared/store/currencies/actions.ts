@@ -1,6 +1,7 @@
 import { ThunkAction } from 'redux-thunk'
 import { ServerData, CurrenciesPayload } from '~/shared/models'
 import { RootState } from '../index'
+import { Unicodes } from '~/shared/initialData'
 
 export const CURRENCIES_LOADING_START = 'CURRENCIES_LOADING_START'
 export const CURRENCIES_LOADING_SUCCESS = 'CURRENCIES_LOADING_SUCCESS'
@@ -55,6 +56,8 @@ export function loadCurrenciesList(): ThunkAction<
 						[item.CharCode]: {
 							Name: item.Name,
 							CharCode: item.CharCode,
+							Icon: `flags/${item.CharCode}.png`,
+							Unicode: Unicodes[item.CharCode] || '',
 							HistoryRate: [
 								{
 									date: data.Date,
