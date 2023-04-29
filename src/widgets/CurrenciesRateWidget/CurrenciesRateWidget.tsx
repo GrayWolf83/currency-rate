@@ -3,6 +3,7 @@ import { CurrencyInputFeature, CurrencySelectFeature } from '~/features'
 import { ExchangeResultFeature } from '~/features/ExchangeResultFeature'
 
 export const CurrenciesRateWidget = () => {
+
 	const [exchange, setExchange] = useState({
 		amount: 1,
 		from: "USD",
@@ -26,3 +27,4 @@ export const CurrenciesRateWidget = () => {
 		</>
 	)
 }
+

@@ -17,10 +17,9 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "~/*": ["./src/*"],
-  }
-
+      "~/*": ["./src/*"]
+    }
   },
   "include": ["src", "dist/serviceWorkers.js"],
-  "references": [{ "path": "./tsconfig.node.json" }],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
