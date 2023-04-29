@@ -7,13 +7,13 @@ import {
 } from './actions'
 
 export interface CurrenciesState {
-	currencies: Currency | null
+	currencies: Currency
 	loading: boolean
 	date: string
 }
 
 const initialState: CurrenciesState = {
-	currencies: null,
+	currencies: {},
 	loading: false,
 	date: '',
 }
