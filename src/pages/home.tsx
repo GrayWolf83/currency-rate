@@ -1,6 +1,12 @@
 import { Typography } from 'antd'
-// import { Valute, ServerData } from '~/shared/models'
+import { SelectRow } from '~/components'
+
 
 export const Home = () => {
-	return <Typography.Title>Home page</Typography.Title>
+  return (
+    <>
+      <Typography.Title>Home page</Typography.Title>
+      <SelectRow />
+    </>
+  )
 }
