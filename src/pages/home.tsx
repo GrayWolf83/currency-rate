@@ -1,15 +1,26 @@
 import { Typography } from 'antd'
-import { SelectComponent } from '~/components/SelectComponent'
-import { initialData } from '~/shared/initialData'
-import { SelectRow } from '~/components'
-
+import { SelectComponent } from '~/entities/components/SelectComponent'
+import { useAppSelector } from '~/shared/store'
+import { getCurrenciesState } from '~/shared/store/currencies'
+import { CurrenciesRateWidget } from '~/widgets'
 
 export const Home = () => {
-  return (
-    <>
-      <Typography.Title>Home page</Typography.Title>
-      <SelectComponent data={initialData.Valute} />
-      <SelectRow />
-    </>
-  )
+	const { currencies } = useAppSelector(getCurrenciesState)
+
+	const handleSelectChange = (value: string) => {
+		console.log(value)
+	}
+
+	return (
+		<>
+			<Typography.Title>Home page</Typography.Title>
+			{currencies && (
+				<SelectComponent
+					onChange={handleSelectChange}
+					data={currencies}
+				/>
+			)}
+			<CurrenciesRateWidget />
+		</>
+	)
 }

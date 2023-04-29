@@ -1,2 +1,2 @@
-export type { Valute } from './Valute'
+export type { Currency, CurrenciesPayload, CurrencyProps } from './Currency'
 export type { ServerData } from './ServerData'

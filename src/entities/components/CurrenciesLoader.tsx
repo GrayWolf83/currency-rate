@@ -1,16 +1,16 @@
 import { ReactNode, useEffect } from 'react'
 import { useAppDispatch } from '~/shared/store'
-import { loadValutes } from '~/shared/store/valutes'
+import { loadCurrenciesList } from '~/shared/store/currencies'
 
 interface IProps {
 	children: ReactNode
 }
 
-export const ValutesLoader = ({ children }: IProps) => {
+export const CurrenciesLoader = ({ children }: IProps) => {
 	const dispatch = useAppDispatch()
 
 	useEffect(() => {
-		dispatch(loadValutes())
+		dispatch(loadCurrenciesList())
 	}, [])
 
 	return <>{children}</>

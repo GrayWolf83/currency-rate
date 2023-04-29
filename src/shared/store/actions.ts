@@ -1,3 +1,3 @@
-import type { ValutesActions } from './valutes'
+import type { CurrencyActions } from './currencies'
 
-export type AppActions = ValutesActions
+export type AppActions = CurrencyActions

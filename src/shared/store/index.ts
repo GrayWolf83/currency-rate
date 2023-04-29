@@ -3,11 +3,11 @@ import thunkMiddleware from 'redux-thunk'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { composeWithDevToolsDevelopmentOnly } from '@redux-devtools/extension'
-import { valutesReducer } from './valutes/reducer'
+import { currencyReducer } from './currencies/reducer'
 
 const rootReducer = persistReducer(
 	{ key: 'redux', storage: storage },
-	combineReducers({ valutes: valutesReducer }),
+	combineReducers({ currencies: currencyReducer }),
 )
 
 export const store = createStore(
