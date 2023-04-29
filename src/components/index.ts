@@ -1,3 +1,3 @@
-import { SelectRow } from './SelectRow'
+export { SelectRow } from './SelectRow'
+export { ValutesLoader } from './ValutesLoader'
 
-export { SelectRow }

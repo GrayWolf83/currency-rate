@@ -1,5 +1,6 @@
 import { Typography } from 'antd'
-import { SelectRow } from '../components/SelectRow'
+import { SelectRow } from '~/components'
+
 
 export const Home = () => {
   return (
