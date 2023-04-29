@@ -19,17 +19,17 @@ interface ValutesLoadingSuccess {
 	payload: ServerData
 }
 
-export function valutesLoadingStartActionCreator(): ValutesLoadingStart {
+function valutesLoadingStartActionCreator(): ValutesLoadingStart {
 	return { type: VALUTES_LOADING_START }
 }
 
-export function valutesLoadingSuccessActionCreator(
+function valutesLoadingSuccessActionCreator(
 	payload: ServerData,
 ): ValutesLoadingSuccess {
 	return { type: VALUTES_LOADING_SUCCESS, payload }
 }
 
-export function valutesLoadingEndActionCreator(): ValutesLoadingEnd {
+function valutesLoadingEndActionCreator(): ValutesLoadingEnd {
 	return { type: VALUTES_LOADING_END }
 }
 
@@ -42,14 +42,12 @@ export function loadValutes(): ThunkAction<
 	return async (dispatch) => {
 		dispatch(valutesLoadingStartActionCreator())
 
-		try {
-			const data = await valutesService.loadValutes()
-			dispatch(valutesLoadingSuccessActionCreator(data))
-		} catch (error) {
-			console.error(error)
-		} finally {
-			dispatch(valutesLoadingEndActionCreator())
-		}
+		const data = await fetch(
+			'https://www.cbr-xml-daily.ru/daily_json.js',
+		).then((res) => res.json())
+		dispatch(valutesLoadingSuccessActionCreator(data))
+
+		dispatch(valutesLoadingEndActionCreator())
 	}
 }
 
