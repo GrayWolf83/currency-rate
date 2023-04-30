@@ -3,13 +3,16 @@ import { FC } from 'react'
 import { SwapOutlined } from '@ant-design/icons'
 
 export interface IMyButton {
-  onClick: () => void
+	onClick: () => void
 }
 
 export const MyButton: FC<IMyButton> = ({ onClick }) => {
-  return (
-    <div>
-      <Button shape='circle' icon={<SwapOutlined />} size='large' onClick={onClick} />
-    </div>
-  )
+	return (
+		<Button
+			shape='circle'
+			icon={<SwapOutlined />}
+			size='large'
+			onClick={onClick}
+		/>
+	)
 }
