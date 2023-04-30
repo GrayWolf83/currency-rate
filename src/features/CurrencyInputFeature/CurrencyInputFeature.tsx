@@ -19,8 +19,6 @@ export const CurrencyInputFeature = ({
 		}
 	}
 
-	console.log('unicode', unicode)
-
 	return (
 		<InputNumber
 			addonBefore={unicode}

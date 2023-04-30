@@ -1,4 +1,3 @@
-import React from 'react'
 import { Line } from '@ant-design/plots'
 import { ExchangeRate } from '~/shared/models'
 
@@ -11,7 +10,6 @@ interface IProps {
 	data: DateProps
 }
 export function LineChart({ data }: IProps) {
-	console.log('render LineChart', data)
 	const chartData = [...data.base]
 	chartData.sort((a, b) => (new Date(b.date) < new Date(a.date) ? 1 : -1))
 	chartData.forEach((item, index) => {
