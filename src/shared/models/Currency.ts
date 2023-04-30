@@ -15,7 +15,7 @@ export interface CurrencyProps {
 	HistoryRate: ExchangeRate[]
 }
 
-interface ExchangeRate {
+export interface ExchangeRate {
 	date: string
 	value: number
 }

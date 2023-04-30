@@ -4,6 +4,7 @@ import { MyButton } from '~/entities/components/UI'
 import { CurrencyInputFeature, CurrencySelectFeature } from '~/features'
 import { ExchangeResultFeature } from '~/features/ExchangeResultFeature'
 import { Unicodes } from '~/shared/initialData'
+import { MyButton } from '~/entities/components/UI'
 
 export const CurrenciesRateWidget = () => {
 	const [exchange, setExchange] = useState({
@@ -12,9 +13,10 @@ export const CurrenciesRateWidget = () => {
 		to: 'AUD',
 	})
 
-	function handleChange(name: string, value: number | string) {
-		setExchange((prev) => ({ ...prev, [name]: value }))
-	}
+
+  function handleChange(name: string, value: number | string) {
+    setExchange((prev) => ({ ...prev, [name]: value }))
+  }
 
 	const handleButton = () => {
 		setExchange((prev) => ({

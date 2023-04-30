@@ -1,16 +1,19 @@
 import { FC } from 'react'
 import { Select } from 'antd'
 import { Currency, CurrencyProps } from '~/shared/models'
+import { Unicodes } from '~/shared/initialData'
 
 interface ISelectProps {
-	data: Currency
-	onChange: (value: string) => void
+  data: Currency
+  onChange: (value: string) => void
+  value: string
 }
 
-export const SelectComponent: FC<ISelectProps> = ({ data, onChange }) => {
-	const handleChange = (value: string) => {
-		onChange(value)
-	}
+export const SelectComponent: FC<ISelectProps> = ({ data, onChange, value }) => {
+  const handleChange = (value: string) => {
+    onChange(value)
+  }
+
 
 	const values: CurrencyProps[] = Object.values(data)
 
@@ -22,6 +25,7 @@ export const SelectComponent: FC<ISelectProps> = ({ data, onChange }) => {
 				size='large'
 				placeholder='Select currency'
 				defaultValue={values[0].CharCode}
+        value={value}
 				optionFilterProp='children'>
 				{values.map((value) => (
 					<Select.Option key={value.CharCode} value={value.CharCode}>
@@ -36,4 +40,5 @@ export const SelectComponent: FC<ISelectProps> = ({ data, onChange }) => {
 			</Select>
 		</>
 	)
+
 }
