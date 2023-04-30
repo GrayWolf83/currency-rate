@@ -16,13 +16,14 @@ export const CurrenciesRateWidget = () => {
 		setExchange((prev) => ({ ...prev, [name]: value }))
 	}
 
-	const handleButton = () => {
-		setExchange((prev) => ({
-			...prev,
-			from: exchange.to,
-			to: exchange.from,
-		}))
-	}
+
+  const handleButton = () => {
+    setExchange((prev) => ({
+      ...prev,
+      from: exchange.to,
+      to: exchange.from,
+    }))
+  }
 
 	return (
 		<>
@@ -56,4 +57,5 @@ export const CurrenciesRateWidget = () => {
 			/>
 		</>
 	)
+
 }
