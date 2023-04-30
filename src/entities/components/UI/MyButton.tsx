@@ -9,7 +9,7 @@ export interface IMyButton {
 export const MyButton: FC<IMyButton> = ({ onClick }) => {
   return (
     <div>
-      <Button shape='circle' icon={<SwapOutlined />} size='large' onClick={onClick} />
+      <Button shape='circle' icon={<SwapOutlined />} size='middle' onClick={onClick} />
     </div>
   )
 }
