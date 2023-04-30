@@ -1,8 +1,8 @@
 import { IUnicode, ServerData } from './models'
 
 export const Unicodes: IUnicode = {
-	RUB: '&#x584;',
-	AUD: '',
+	RUB: '\u20BD',
+	AUD: '\u20BD',
 	AZN: '',
 	GBP: '',
 	AMD: '',
@@ -23,7 +23,7 @@ export const Unicodes: IUnicode = {
 	KZT: '',
 	CAD: '',
 	QAR: '',
-	KGS: '',
+	KGS: '\u20C0',
 	CNY: '',
 	MDL: '',
 	NZD: '',
