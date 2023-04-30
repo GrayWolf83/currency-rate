@@ -4,7 +4,6 @@ import { MyButton } from '~/entities/components/UI'
 import { CurrencyInputFeature, CurrencySelectFeature } from '~/features'
 import { ExchangeResultFeature } from '~/features/ExchangeResultFeature'
 import { Unicodes } from '~/shared/initialData'
-import { MyButton } from '~/entities/components/UI'
 
 export const CurrenciesRateWidget = () => {
 	const [exchange, setExchange] = useState({
@@ -13,10 +12,9 @@ export const CurrenciesRateWidget = () => {
 		to: 'AUD',
 	})
 
-
-  function handleChange(name: string, value: number | string) {
-    setExchange((prev) => ({ ...prev, [name]: value }))
-  }
+	function handleChange(name: string, value: number | string) {
+		setExchange((prev) => ({ ...prev, [name]: value }))
+	}
 
 	const handleButton = () => {
 		setExchange((prev) => ({
@@ -38,17 +36,24 @@ export const CurrenciesRateWidget = () => {
 					unicode={Unicodes[exchange.from]}
 					value={exchange.amount}
 				/>
-				<CurrencySelectFeature />
+				<CurrencySelectFeature
+					name='from'
+					onChange={handleChange}
+					value={exchange.from}
+				/>
 				<MyButton onClick={handleButton} />
-				<CurrencySelectFeature />
-			</Row>
-
-			<Row style={{ padding: '10px' }}>
-				<ExchangeResultFeature
-					baseCurrencyKey={exchange.from}
-					targetCurrencyKey={exchange.to}
+				<CurrencySelectFeature
+					name='to'
+					onChange={handleChange}
+					value={exchange.to}
 				/>
 			</Row>
+
+			<ExchangeResultFeature
+				baseCurrencyKey={exchange.from}
+				targetCurrencyKey={exchange.to}
+				amount={exchange.amount}
+			/>
 		</>
 	)
 }

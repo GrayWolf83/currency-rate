@@ -1,74 +1,80 @@
-import { Skeleton, Space } from 'antd'
-import React, { useMemo } from 'react'
-import { CaretDownOutlined, CaretUpOutlined, FallOutlined, RiseOutlined } from '@ant-design/icons'
+import { Col, Row, Space } from 'antd'
+import { useMemo } from 'react'
 import { LineChart } from './components/LineChart'
-import { useAppSelector, useAppStore } from '~/shared/store'
+import { useAppSelector } from '~/shared/store'
 import { getCurrenciesState } from '~/shared/store/currencies'
 import GrowthTrend from './components/GrowthTrend'
 
 interface IPrios {
-    amount: number
-    baseCurrencyKey: string
-    targetCurrencyKey: string
+	amount: number
+	baseCurrencyKey: string
+	targetCurrencyKey: string
 }
 
-export function ExchangeResultFeature({ amount, baseCurrencyKey, targetCurrencyKey }: IPrios) {
-    const { currencies } = useAppSelector(getCurrenciesState)
-    const baseCurrency = currencies[baseCurrencyKey]
-    const targetCurrency = currencies[targetCurrencyKey]
-    const currentExchangeRate = baseCurrency?.HistoryRate[0].value / targetCurrency.HistoryRate[0].value
-    const previousExchangeRate = baseCurrency?.HistoryRate[1].value / targetCurrency.HistoryRate[0].value
-    const growthTrend = ((currentExchangeRate - previousExchangeRate) / previousExchangeRate) * 100
+export function ExchangeResultFeature({
+	amount,
+	baseCurrencyKey,
+	targetCurrencyKey,
+}: IPrios) {
+	const { currencies } = useAppSelector(getCurrenciesState)
+	const baseCurrency = currencies[baseCurrencyKey] // from
+	const targetCurrency = currencies[targetCurrencyKey] //to
+	const currentExchangeRate =
+		baseCurrency?.HistoryRate[0].value / targetCurrency.HistoryRate[0].value
 
-    const exchangeResult = Math.round(100 * amount * baseCurrency.HistoryRate[0].value / targetCurrency.HistoryRate[0].value) / 100
+	console.log('currentExchangeRate', currentExchangeRate)
 
-    console.log("render Result")
+	const previousExchangeRate =
+		baseCurrency?.HistoryRate[1].value / targetCurrency.HistoryRate[0].value
+	const growthTrend =
+		((currentExchangeRate - previousExchangeRate) / previousExchangeRate) *
+		100
 
-    const chart = useMemo(() => <LineChart data={{ base: baseCurrency.HistoryRate, target: targetCurrency.HistoryRate }} />, [baseCurrency.HistoryRate, targetCurrency.HistoryRate]);
+	const exchangeResult =
+		Math.round(
+			(100 * amount * baseCurrency.HistoryRate[0].value) /
+				targetCurrency.HistoryRate[0].value,
+		) / 100
 
-    return (
-        <Space
-            direction="vertical"
-            size="middle"
-            style={{
-                display: 'flex',
-            }}
-        >
-            <h1>Exchange result</h1>
+	console.log('render Result')
 
-            <Space
-                size="middle"
-                style={{
-                    display: 'flex',
-                }}
-            >
-                <span
-                    style={{ fontSize: '2rem', fontWeight: 700 }}
-                >
-                    {exchangeResult} {targetCurrency.Unicode}
-                </span>
-            </Space>
+	const chart = useMemo(
+		() => (
+			<LineChart
+				data={{
+					base: baseCurrency.HistoryRate,
+					target: targetCurrency.HistoryRate,
+				}}
+			/>
+		),
+		[baseCurrency.HistoryRate, targetCurrency.HistoryRate],
+	)
 
+	return (
+		<Row style={{ padding: '10px' }}>
+			<Col span={12}>
+				<h3>Exchange result</h3>
+				<span
+					style={{
+						fontSize: '2rem',
+						fontWeight: 700,
+						display: 'block',
+					}}>
+					{exchangeResult} {targetCurrency.Unicode}
+				</span>
+				<span style={{ fontSize: '1.5rem', fontWeight: 700 }}>
+					{' '}
+					1 {baseCurrency.Unicode} ={' '}
+					{Math.round(currentExchangeRate * 100) / 100}
+					{targetCurrency.Unicode}
+				</span>
+				<GrowthTrend growthTrend={growthTrend} />
+			</Col>
 
-            <Space
-                size="middle"
-                style={{
-                    display: 'flex',
-                    flexDirection: "row",
-                    alignItems: "flex-end",
-                }}
-            >
-                <span
-                    style={{ fontSize: "1.5rem", fontWeight: 700 }}
-                > 1 {baseCurrency.Unicode} = {Math.round(currentExchangeRate * 100) / 100}{targetCurrency.Unicode}
-                </span>
-                <GrowthTrend growthTrend={growthTrend} />
-            </Space>
-            <div style={{ maxWidth: 200 }}>
-                <span>ExchangeRate dynamic</span>
-                {chart}
-            </div>
-
-        </Space>
-    )
+			<Col span={12}>
+				<span>ExchangeRate dynamic</span>
+				{chart}
+			</Col>
+		</Row>
+	)
 }
