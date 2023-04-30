@@ -52,7 +52,7 @@ export function loadCurrenciesList(): ThunkAction<
         Name: 'Российский рубль',
         CharCode: 'RUB',
         Icon: `flags/RUB.png`,
-        Unicode: '&#8381;',
+        Unicode: '\u20BD',
         HistoryRate: [
           {
             date: data.Date,

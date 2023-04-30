@@ -1,6 +1,7 @@
 import { IUnicode } from './models'
 
 export const Unicodes: IUnicode = {
+
   RUB: '₽',
   AUD: '$',
   AZN: 'man.',
@@ -45,4 +46,5 @@ export const Unicodes: IUnicode = {
   ZAR: 'R',
   KRW: '₩',
   JPY: '¥',
+
 }
