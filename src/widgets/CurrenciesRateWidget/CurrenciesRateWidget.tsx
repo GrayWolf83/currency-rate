@@ -3,15 +3,16 @@ import { CurrencyInputFeature, CurrencySelectFeature, ExchangeResultFeature } fr
 import { Unicodes } from '~/shared/initialData'
 
 export const CurrenciesRateWidget = () => {
+
 	const [exchange, setExchange] = useState({
 		amount: 1,
 		from: 'USD',
 		to: 'KGS',
 	})
 
-	function handleChange(name: string, value: number | string) {
-		setExchange((prev) => ({ ...prev, [name]: value }))
-	}
+  function handleChange(name: string, value: number | string) {
+    setExchange((prev) => ({ ...prev, [name]: value }))
+  }
 
 	return (
 		<>
@@ -30,4 +31,5 @@ export const CurrenciesRateWidget = () => {
 			/>
 		</>
 	)
+
 }
