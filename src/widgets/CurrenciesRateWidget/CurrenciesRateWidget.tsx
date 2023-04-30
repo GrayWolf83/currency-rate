@@ -1,9 +1,12 @@
 import { Row } from 'antd'
 import { useState } from 'react'
-import { MyButton } from '~/entities/components/UI'
-import { CurrencyInputFeature, CurrencySelectFeature } from '~/features'
-import { ExchangeResultFeature } from '~/features/ExchangeResultFeature'
-import { Unicodes } from '~/shared/initialData'
+import {
+	CurrencyInputFeature,
+	CurrencySelectFeature,
+	ExchangeResultFeature,
+	ChangeCurrenciesFeature,
+} from '~/features'
+import { Unicodes } from '~/shared/constants'
 
 export const CurrenciesRateWidget = () => {
 	const [exchange, setExchange] = useState({
@@ -16,14 +19,13 @@ export const CurrenciesRateWidget = () => {
 		setExchange((prev) => ({ ...prev, [name]: value }))
 	}
 
-
-  const handleButton = () => {
-    setExchange((prev) => ({
-      ...prev,
-      from: exchange.to,
-      to: exchange.from,
-    }))
-  }
+	const handleButton = () => {
+		setExchange((prev) => ({
+			...prev,
+			from: exchange.to,
+			to: exchange.from,
+		}))
+	}
 
 	return (
 		<>
@@ -42,7 +44,7 @@ export const CurrenciesRateWidget = () => {
 					onChange={handleChange}
 					value={exchange.from}
 				/>
-				<MyButton onClick={handleButton} />
+				<ChangeCurrenciesFeature onClick={handleButton} />
 				<CurrencySelectFeature
 					name='to'
 					onChange={handleChange}
@@ -57,5 +59,4 @@ export const CurrenciesRateWidget = () => {
 			/>
 		</>
 	)
-
 }
