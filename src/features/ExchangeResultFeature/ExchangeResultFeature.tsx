@@ -1,4 +1,4 @@
-import { Col, Row, Space } from 'antd'
+import { Col, Row } from 'antd'
 import { useMemo } from 'react'
 import { LineChart } from './components/LineChart'
 import { useAppSelector } from '~/shared/store'
@@ -22,8 +22,6 @@ export function ExchangeResultFeature({
 	const currentExchangeRate =
 		baseCurrency?.HistoryRate[0].value / targetCurrency.HistoryRate[0].value
 
-	console.log('currentExchangeRate', currentExchangeRate)
-
 	const previousExchangeRate =
 		baseCurrency?.HistoryRate[1].value / targetCurrency.HistoryRate[0].value
 	const growthTrend =
@@ -36,14 +34,14 @@ export function ExchangeResultFeature({
 				targetCurrency.HistoryRate[0].value,
 		) / 100
 
-	console.log('render Result')
-
 	const chart = useMemo(
 		() => (
 			<LineChart
 				data={{
-					base: baseCurrency.HistoryRate,
-					target: targetCurrency.HistoryRate,
+					base: JSON.parse(JSON.stringify(baseCurrency.HistoryRate)),
+					target: JSON.parse(
+						JSON.stringify(targetCurrency.HistoryRate),
+					),
 				}}
 			/>
 		),
