@@ -1,9 +1,9 @@
-import { IUnicode } from './models'
+import { IUnicode } from '../models'
 
 export const Unicodes: IUnicode = {
 	RUB: '₽',
 	AUD: '$',
-	AZN: 'man.',
+	AZN: '₼',
 	GBP: '£',
 	AMD: 'դր',
 	BYN: 'Br',
@@ -12,7 +12,7 @@ export const Unicodes: IUnicode = {
 	HUF: 'Ft',
 	VND: '₫',
 	HKD: '$',
-	GEL: 'GEL',
+	GEL: '₾',
 	DKK: 'kr',
 	AED: 'د.إ',
 	USD: '$',
@@ -25,7 +25,7 @@ export const Unicodes: IUnicode = {
 	QAR: '﷼',
 	KGS: 'сом',
 	CNY: '¥',
-	MDL: 'MDL',
+	MDL: 'L',
 	NZD: '$',
 	NOK: 'kr',
 	PLN: 'zł',

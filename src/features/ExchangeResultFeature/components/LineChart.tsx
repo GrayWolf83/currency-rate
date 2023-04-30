@@ -21,7 +21,8 @@ export function LineChart({ data }: IProps) {
 		data: chartData,
 		xField: 'date',
 		yField: 'value',
-		height: 200,
+		height: 150,
+
 		yAxis: {
 			min: minValue,
 			tickInterval: 2,
@@ -40,5 +41,9 @@ export function LineChart({ data }: IProps) {
 			},
 		},
 	}
-	return <Line {...config} />
+	return (
+		<div className='line-chart'>
+			<Line {...config} />
+		</div>
+	)
 }

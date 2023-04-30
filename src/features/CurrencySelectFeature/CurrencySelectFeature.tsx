@@ -1,29 +1,35 @@
 import { FC } from 'react'
-import { SelectComponent } from '~/entities/components/SelectComponent'
+import { SelectComponent } from '~/entities/components'
 
 import { useAppSelector } from '~/shared/store'
 import { getCurrenciesState } from '~/shared/store/currencies'
 
 interface CurrencySelectFeatureProps {
-  onChange: (name: string, value: string) => void
-  name: string
-  value: string
+	onChange: (name: string, value: string) => void
+	name: string
+	value: string
 }
 
-export const CurrencySelectFeature: FC<CurrencySelectFeatureProps> = ({ value, name, onChange }) => {
-  const { currencies } = useAppSelector(getCurrenciesState)
+export const CurrencySelectFeature: FC<CurrencySelectFeatureProps> = ({
+	value,
+	name,
+	onChange,
+}) => {
+	const { currencies } = useAppSelector(getCurrenciesState)
 
-  const handleSelectChange = (value: string) => {
-    onChange(name, value)
-    //currencies && console.log(currencies[`${value}`].CharCode)
-    // Object.keys(currencies).length && setUnicode(Unicodes[currencies[`${value}`].CharCode])
-  }
+	const handleSelectChange = (value: string) => {
+		onChange(name, value)
+	}
 
-  return (
-    <>
-      {Boolean(Object.keys(currencies).length) && (
-        <SelectComponent onChange={handleSelectChange} data={currencies} value={value} />
-      )}
-    </>
-  )
+	return (
+		<>
+			{Boolean(Object.keys(currencies).length) && (
+				<SelectComponent
+					onChange={handleSelectChange}
+					data={currencies}
+					value={value}
+				/>
+			)}
+		</>
+	)
 }

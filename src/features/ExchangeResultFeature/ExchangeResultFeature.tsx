@@ -50,7 +50,9 @@ export function ExchangeResultFeature({
 
 	return (
 		<Row style={{ padding: '10px' }}>
-			<Col span={12}>
+			<Col
+				span={window.innerWidth < 768 ? 24 : 12}
+				style={{ margin: '10px 0' }}>
 				<h3>Exchange result</h3>
 				<span
 					style={{
@@ -69,7 +71,9 @@ export function ExchangeResultFeature({
 				<GrowthTrend growthTrend={growthTrend} />
 			</Col>
 
-			<Col span={12}>
+			<Col
+				span={window.innerWidth < 768 ? 24 : 12}
+				style={{ margin: '10px 0' }}>
 				<span>ExchangeRate dynamic</span>
 				{chart}
 			</Col>
