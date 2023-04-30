@@ -6,15 +6,16 @@ import { ExchangeResultFeature } from '~/features/ExchangeResultFeature'
 import { Unicodes } from '~/shared/initialData'
 
 export const CurrenciesRateWidget = () => {
-  const [exchange, setExchange] = useState({
-    amount: 1,
-    from: 'RUB',
-    to: 'AUD',
-  })
+	const [exchange, setExchange] = useState({
+		amount: 1,
+		from: 'RUB',
+		to: 'AUD',
+	})
 
-  function handleChange(name: string, value: number | string) {
-    setExchange((prev) => ({ ...prev, [name]: value }))
-  }
+	function handleChange(name: string, value: number | string) {
+		setExchange((prev) => ({ ...prev, [name]: value }))
+	}
+
 
   const handleButton = () => {
     setExchange((prev) => ({
@@ -24,27 +25,37 @@ export const CurrenciesRateWidget = () => {
     }))
   }
 
-  return (
-    <>
-      <Row align='middle' justify='space-between' style={{ padding: '10px' }}>
-        <CurrencyInputFeature
-          name='amount'
-          onChange={handleChange}
-          unicode={Unicodes[exchange.from]}
-          value={exchange.amount}
-        />
-        <CurrencySelectFeature name='from' value={exchange.from} onChange={handleChange} />
-        <MyButton onClick={handleButton} />
-        <CurrencySelectFeature name='to' value={exchange.to} onChange={handleChange} />
-      </Row>
+	return (
+		<>
+			<Row
+				align='middle'
+				justify='space-between'
+				style={{ padding: '10px' }}>
+				<CurrencyInputFeature
+					name='amount'
+					onChange={handleChange}
+					unicode={Unicodes[exchange.from]}
+					value={exchange.amount}
+				/>
+				<CurrencySelectFeature
+					name='from'
+					onChange={handleChange}
+					value={exchange.from}
+				/>
+				<MyButton onClick={handleButton} />
+				<CurrencySelectFeature
+					name='to'
+					onChange={handleChange}
+					value={exchange.to}
+				/>
+			</Row>
 
-      <Row style={{ padding: '10px' }}>
-        <ExchangeResultFeature
-          amount={exchange.amount}
-          baseCurrencyKey={exchange.from}
-          targetCurrencyKey={exchange.to}
-        />
-      </Row>
-    </>
-  )
+			<ExchangeResultFeature
+				baseCurrencyKey={exchange.from}
+				targetCurrencyKey={exchange.to}
+				amount={exchange.amount}
+			/>
+		</>
+	)
+
 }
