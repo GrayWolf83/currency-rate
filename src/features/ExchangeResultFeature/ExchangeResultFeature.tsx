@@ -20,32 +20,36 @@ export function ExchangeResultFeature({
 	const baseCurrency = currencies[baseCurrencyKey] // from
 	const targetCurrency = currencies[targetCurrencyKey] //to
 	const currentExchangeRate =
-		baseCurrency?.HistoryRate[0].value / targetCurrency.HistoryRate[0].value
+		baseCurrency?.HistoryRate[0].value /
+		targetCurrency?.HistoryRate[0].value
 
 	const previousExchangeRate =
-		baseCurrency?.HistoryRate[1].value / targetCurrency.HistoryRate[0].value
+		baseCurrency?.HistoryRate[1].value /
+		targetCurrency?.HistoryRate[0].value
 	const growthTrend =
 		((currentExchangeRate - previousExchangeRate) / previousExchangeRate) *
 		100
 
 	const exchangeResult =
 		Math.round(
-			(100 * amount * baseCurrency.HistoryRate[0].value) /
-				targetCurrency.HistoryRate[0].value,
+			(100 * amount * baseCurrency?.HistoryRate[0].value) /
+				targetCurrency?.HistoryRate[0].value,
 		) / 100
 
 	const chart = useMemo(
 		() => (
 			<LineChart
 				data={{
-					base: JSON.parse(JSON.stringify(baseCurrency.HistoryRate)),
+					base: JSON.parse(
+						JSON.stringify(baseCurrency?.HistoryRate) || '[]',
+					),
 					target: JSON.parse(
-						JSON.stringify(targetCurrency.HistoryRate),
+						JSON.stringify(targetCurrency?.HistoryRate) || '[]',
 					),
 				}}
 			/>
 		),
-		[baseCurrency.HistoryRate, targetCurrency.HistoryRate],
+		[baseCurrency?.HistoryRate, targetCurrency?.HistoryRate],
 	)
 
 	return (
@@ -60,13 +64,13 @@ export function ExchangeResultFeature({
 						fontWeight: 700,
 						display: 'block',
 					}}>
-					{exchangeResult} {targetCurrency.Unicode}
+					{exchangeResult} {targetCurrency?.Unicode}
 				</span>
 				<span style={{ fontSize: '1.5rem', fontWeight: 700 }}>
 					{' '}
-					1 {baseCurrency.Unicode} ={' '}
+					1 {baseCurrency?.Unicode} ={' '}
 					{Math.round(currentExchangeRate * 100) / 100}
-					{targetCurrency.Unicode}
+					{targetCurrency?.Unicode}
 				</span>
 				<GrowthTrend growthTrend={growthTrend} />
 			</Col>
